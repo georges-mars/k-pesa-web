@@ -9,17 +9,23 @@
     </style>
     <script>
       window.onload = function() {
-        var deepLink = 'kpesa://deriv-callback' + window.location.search;
+        // Deriv may use query params (?code=...) or hash fragment (#token1=...)
+        var params = window.location.search || '';
+        if (!params && window.location.hash) {
+          params = '?' + window.location.hash.substring(1);
+        }
+        var deepLink = 'kpesa://deriv-callback' + params;
         document.getElementById('manual-btn').href = deepLink;
+        // Auto-redirect after a short delay
         setTimeout(function() {
           window.location.href = deepLink;
-        }, 500);
+        }, 300);
       };
     </script>
   </head>
   <body>
     <h3>Returning to K-PESA app...</h3>
-    <p>If you are not redirected automatically within a few seconds, tap the button below.</p>
+    <p>If you are not redirected automatically, tap the button below.</p>
     <a id="manual-btn" href="#" class="btn">Open K-PESA</a>
   </body>
 </html>
