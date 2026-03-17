@@ -2,9 +2,24 @@
 <html>
   <head>
     <title>Redirecting to K-PESA...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body { font-family: sans-serif; text-align: center; padding-top: 50px; }
+      .btn { display: inline-block; padding: 12px 24px; background-color: #37c215; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px; }
+    </style>
     <script>
-      window.location = 'kpesa://deriv-callback' + window.location.search;
+      window.onload = function() {
+        var deepLink = 'kpesa://deriv-callback' + window.location.search;
+        document.getElementById('manual-btn').href = deepLink;
+        setTimeout(function() {
+          window.location.href = deepLink;
+        }, 500);
+      };
     </script>
   </head>
-  <body><p>Returning to K-PESA app&hellip;</p></body>
+  <body>
+    <h3>Returning to K-PESA app...</h3>
+    <p>If you are not redirected automatically within a few seconds, tap the button below.</p>
+    <a id="manual-btn" href="#" class="btn">Open K-PESA</a>
+  </body>
 </html>
